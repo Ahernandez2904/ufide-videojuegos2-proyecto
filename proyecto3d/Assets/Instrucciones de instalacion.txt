@@ -1,0 +1,8 @@
+Para que funcione correctamente,
+se debe hacer una nueva carpeta llamada 
+Unity Store y agregar las siguientes dependencias
+del Package Manager y proyectos anteriores:
+
+*PolygonStarter
+*Standard Assets
+*Terrain Tools
