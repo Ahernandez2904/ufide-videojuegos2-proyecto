@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Events;
 
 public class HealthController : MonoBehaviour
@@ -11,11 +13,21 @@ public class HealthController : MonoBehaviour
 
     [SerializeField]
     UnityEvent onDeath;
+
+    [SerializeField]
+    Text HealthText;
+
     GameObject player;
+
     Animator animator;
+
     public float health;
+
     float heal;
+
     int isDefeatedHash;
+
+    GameObject PickUp1;
 
     void Awake() { 
         health = maximumHealth;
@@ -31,11 +43,11 @@ public class HealthController : MonoBehaviour
             animator.SetBool(isDefeatedHash, true); }
     }
 
-    public GameObject PickUp1;
-
     void OnTriggerEnter(Collider col)
     {
         PickUp1 = GameObject.FindGameObjectWithTag("NPC");
         health = health + 50;
-        }
+        if(health > maximumHealth) { health = maximumHealth; }
+        HealthText.text = health.ToString();
     }
+}

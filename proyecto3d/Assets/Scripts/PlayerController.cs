@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     Text status;
 
     int gemsCount;
+
     bool keyFound;
 
     public void IncreaseGems(int quantity)
