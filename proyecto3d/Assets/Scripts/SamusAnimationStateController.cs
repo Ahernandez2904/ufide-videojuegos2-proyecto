@@ -7,6 +7,9 @@ public class SamusAnimationStateController : MonoBehaviour
     [SerializeField]
     GameObject character;
 
+    [SerializeField]
+    GameObject parent;
+
     Animator animator;
 
     int isWalkingHash;
@@ -35,7 +38,7 @@ public class SamusAnimationStateController : MonoBehaviour
         bool isDashing = animator.GetBool(isDashingHash);
         bool isDefeated = animator.GetBool(isDefeatedHash);
 
-        bool isWalkingCond = character.GetComponent<Rigidbody>().velocity.sqrMagnitude >= 0.02f;
+        bool isWalkingCond = parent.GetComponent<Rigidbody>().velocity.sqrMagnitude >= 0.1f;
         bool isAttackingCond = false;
         bool isDashingCond = false;
         bool isDefeatedCond = false;

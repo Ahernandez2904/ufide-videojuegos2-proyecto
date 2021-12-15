@@ -32,6 +32,7 @@ public class HealthController : MonoBehaviour
     void Awake() { 
         health = maximumHealth;
         isDefeatedHash = Animator.StringToHash("isDefeated");
+        HealthText.text = health.ToString();
     }
 
     public void TakeDamage(float damage)

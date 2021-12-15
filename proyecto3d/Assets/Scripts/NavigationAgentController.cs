@@ -24,7 +24,10 @@ public class NavigationAgentController : MonoBehaviour
     float attackRange = 0.5F;
 
     [SerializeField]
-    float damage = 1.0F;
+    float damage = 25.0F;
+
+    [SerializeField]
+    GameObject chara;
 
     Animator animator;
 
@@ -39,28 +42,35 @@ public class NavigationAgentController : MonoBehaviour
     [Tooltip("Current distance to raget.")]
     float distanceToTarget = Mathf.Infinity;
 
+    int attackHash;
+
+    int isWalkingHash;
+
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
-        //animator = GetComponent<Animator>();
+        animator = chara.GetComponent<Animator>();
         whatIsTarget = LayerMask.GetMask(LayerMask.LayerToName(target.gameObject.layer));
+        attackHash = Animator.StringToHash("Attack");
+        isWalkingHash = Animator.StringToHash("isWalking");
     }
 
     void Update()
     {
+        bool isWalking = animator.GetBool(isWalkingHash);
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (distanceToTarget > chaseRange) {
             RaycastHit raycast;
             Physics.Raycast(transform.position, target.position, out raycast);
             if (chaseTarget && raycast.collider && raycast.collider.gameObject != target.gameObject) {
                 chaseTarget = false;
-                //animator.SetFloat("Speed", 0.0F);
+                if(isWalking) { animator.SetBool(isWalkingHash, false); }
             }
         }
         if (chaseTarget) { EngageTarget(); }
         else if (distanceToTarget <= chaseRange) {
             chaseTarget = true;
-            //animator.SetFloat("Speed", 1.0F);
+            if (isWalking) { animator.SetBool(isWalkingHash, true); }
         }
     }
 

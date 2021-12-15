@@ -15,7 +15,6 @@ public class MovementController : MonoBehaviour
     {
         MoveCharacter();
         RotationCharacter();
-
     }
 
     private void MoveCharacter()
