@@ -11,14 +11,31 @@ public class HealthController : MonoBehaviour
 
     [SerializeField]
     UnityEvent onDeath;
+    GameObject player;
+    Animator animator;
+    public float health;
+    float heal;
+    int isDefeatedHash;
 
-    float health;
-
-    void Awake() { health = maximumHealth; }
+    void Awake() { 
+        health = maximumHealth;
+        isDefeatedHash = Animator.StringToHash("isDefeated");
+    }
 
     public void TakeDamage(float damage)
     {
+        bool isDefeated = animator.GetBool(isDefeatedHash);
         health -= damage;
-        if (health <= 0.0F && onDeath != null) { onDeath.Invoke(); }
+        if (health <= 0.0F && onDeath != null) {
+            onDeath.Invoke();
+            animator.SetBool(isDefeatedHash, true); }
     }
-}
+
+    public GameObject PickUp1;
+
+    void OnTriggerEnter(Collider col)
+    {
+        PickUp1 = GameObject.FindGameObjectWithTag("NPC");
+        health = health + 50;
+        }
+    }
