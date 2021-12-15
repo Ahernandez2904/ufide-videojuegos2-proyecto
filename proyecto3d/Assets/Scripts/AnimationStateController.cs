@@ -7,7 +7,6 @@ public class AnimationStateController : MonoBehaviour
     [SerializeField]
     GameObject player;
 
-    public bool isRunning;
 
     Animator animator;
 
@@ -26,7 +25,7 @@ public class AnimationStateController : MonoBehaviour
     {
         bool isWalking = animator.GetBool(isWalkingHash);
         bool isRunning = animator.GetBool(isRunningHash);
-        bool forwardPressed = Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0;
+        bool forwardPressed = Input.GetAxis("Horizontal") != 0F || Input.GetAxis("Vertical") != 0F;
         bool runPressed = Input.GetKey(KeyCode.LeftShift);
         bool ctrlPressed = Input.GetKey(KeyCode.LeftControl);
 
@@ -46,5 +45,6 @@ public class AnimationStateController : MonoBehaviour
         {
             animator.SetBool(isWalkingHash, false);
         }
+
     }
 }
